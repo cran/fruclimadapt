@@ -43,10 +43,12 @@ phenological stage.
 \examples{
 data(Tudela_DW)
 data(Bigtop_reqs)
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
-# Select the first five seasons in Tudela_DW example dataset
-Tudela_Sel <- Tudela_DW \%>\% filter (Tudela_DW$Year<=2005)
+# Select the first two seasons in Tudela_DW example dataset
+Tudela_Sel <- Tudela_DW \%>\% 
+       filter (Tudela_DW$Year<=2002)
 # Generate hourly temperatures from the example dataset
 Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
 # Calculate chill as chill portions, starting on DOY 305
@@ -58,7 +60,6 @@ GDH <- GDH_linear(Tudela_HT,4.7,999,999)
 # the function phenology_sequential
 Tudela_CH <- merge(Chill,GDH) \%>\%
   select(Date, Year, Month, Day, DOY, Chill,GDH) \%>\%
-    arrange(Date) \%>\%
     rename(GD=GDH)
 # Obtain the predicted dates using the example dataset with requirements
 Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)

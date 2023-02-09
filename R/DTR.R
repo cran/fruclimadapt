@@ -18,14 +18,15 @@
 #'
 #' # Select the appropiate columns from the Tudela_DW example dataset,
 #' # and estimate the mean DTR for July on each year in the dataset.
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' Weather <- Tudela_DW %>%
 #'    select(Year, Month, Day, Tmax, Tmin)
 #' DTR_July <- DTR(Weather, 182, 212)
 #'
 #' @export DTR
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 DTR <- function(climdata, init_d, end_d)
 {

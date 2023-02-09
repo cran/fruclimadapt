@@ -30,15 +30,17 @@
 #' # Select the appropiate columns from the Tudela_DW example dataset,
 #' # create a vector or harvest dates and estimate the coolness index 
 #' # for the 30 days prior to harvest on each year in the dataset.
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' Weather <- Tudela_DW %>%
-#'    select(Year, Month, Day, Tmax, Tmin)
+#'    select(Year, Month, Day, Tmax, Tmin) %>% 
+#'    filter (Tudela_DW$Year<=2002)
 #' harvest <- c(225, 250, 275)
 #' coolness <- coolness_index(Weather, harvest)
 #'
 #' @export coolness_index
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 coolness_index <- function(climdata, harvest, span=30)
 {

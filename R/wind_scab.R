@@ -60,14 +60,23 @@
 #' # Select the appropiate columns from the example Dates_BT dataset
 #' # and estimate wind scab risk for Big Top nectarine in Tudela using
 #' # the example weather dataset Tudela_DW
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
-#' Growth_BT <- Dates_BT %>% select(Year, Start_ing, End_ing, Harvest)
-#' WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
+#' Bloom <- Dates_BT %>%
+#'    select(Year, sbloom) %>%
+#'    rename(Fday=sbloom) %>%
+#'    filter(Year==2003)
+#' 
+#' Growth_BT <- Dates_BT %>% select(Year, Start_ing, End_ing, Harvest) %>% 
+#'    filter(Year==2003)
+#' Weather <- Tudela_DW %>%
+#'    filter (Tudela_DW$Year==2003)
+#' WindRisk_BT <- wind_scab(Weather, Growth_BT)
 #' 
 #' @export wind_scab
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date make_datetime
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date make_datetime as_datetime date year month day yday hour
 
 wind_scab <- function(climdata,fendata)
 {

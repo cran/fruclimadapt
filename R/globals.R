@@ -1,4 +1,4 @@
-globalVariables(c("%>%","BEDD_day","Chill","Cool","Cool_d","Cool_n","DOY","DTR",
+globalVariables(c("%>%",":=","BEDD_day","Chill","Cool","Cool_d","Cool_n","DOY","DTR",
                          "DTR_adj","Dam","Date","Datetime","Day","Daylength","Days",
                          "ET_m","ET_os","E_s","FST","Fav_d","GD","GDD","GDD_day","GDH",
                          "H_day","Hot","Hot_d","Hour","HourC","Inter_E","JPm","K","LT_0",
@@ -10,4 +10,5 @@ globalVariables(c("%>%","BEDD_day","Chill","Cool","Cool_d","Cool_n","DOY","DTR",
                          "bind_cols","bind_rows","day","delt","everything","filter",
                          "ftmprt","group_by","h_russ","h_wind","h_wpol","if_else","m_lat",
                          "make_datetime","mutate","rename","right_join","select","slice",
-                         "sr","summarise","summarise_all","tail","windh","wpol","case_when","DTR_a","DTR_d"))
+                         "sr","summarise","summarise_all","tail","windh","wpol","case_when","DTR_a","DTR_d",
+                         "TA","TA_adj","TA_obs","TA_cef"))

@@ -53,14 +53,19 @@
 #'
 #' # Estimate weather conditions during blooming season using the example
 #' # datasets included in the package
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
-#' Bloom_BT <- Dates_BT %>% select(Year, sbloom, ebloom)
-#' Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
+#' Bloom_BT <- Dates_BT %>% 
+#'    select(Year, sbloom, ebloom) %>% 
+#'    filter(Dates_BT$Year<=2002)
+#' Weather <- Tudela_DW %>%
+#'    filter (Tudela_DW$Year<=2002)
+#' Pol_weather_BT <- pollination_weather(Weather,Bloom_BT,42.13132)
 #' 
 #' @export pollination_weather
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date make_datetime
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date make_datetime year month day hour yday
 
 pollination_weather <- function(climdata, fendata, lat)
 {
@@ -85,7 +90,7 @@ pollination_weather <- function(climdata, fendata, lat)
     mutate(wpol= if_else(Temp>=12.5 & Temp<=30 & u2 <=4.5,1,0)) %>%
     group_by(Date) %>%
     summarise(h_wpol= sum(wpol)) %>%
-    right_join(rain, by = "Date", all = TRUE) %>%
+    right_join(rain, by = "Date") %>%
     mutate(h_wpol = ifelse(Prec >= 2, 0, h_wpol)) %>%
     mutate(Year=year(Date),Month=month(Date),Day=day(Date), DOY=yday(Date))
 

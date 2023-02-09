@@ -40,15 +40,19 @@
 #' @examples
 #'
 #' # Generate hourly temperatures
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
-#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#' Weather <- Tudela_DW %>%
+#'    filter (Tudela_DW$Year<=2002)
+#' Tudela_HT <- hourly_temps(Weather,42.13132)
 #' # Calculate chill as chill portions, starting on DOY 305
 #' Chill_p <- chill_portions(Tudela_HT,305)
 #' 
 #' @export chill_portions
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
+#' @importFrom data.table setDT rleid
 
 chill_portions <- function(climdata, Start){
 

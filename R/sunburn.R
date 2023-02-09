@@ -38,15 +38,16 @@
 #'
 #' # Create one vector with start date (i.e. hand thinning) and a vector 
 #' # with harvest dates to test sunburn risk for several cultivars using.
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
 #' Thinning_d <- 135
 #' Harvest_d <- c(225,245,260)
 #' Sunburn_risk <- sunburn(Tudela_DW,Thinning_d, Harvest_d)
 #' 
 #' @export sunburn
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 
 sunburn <- function(climdata,first_d, last_d)

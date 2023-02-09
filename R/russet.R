@@ -37,20 +37,24 @@
 #' # Select the appropiate columns from the example dataset
 #' # Dates_BT and rename column names to make the file compatible
 #' # with the function
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
 #' Bloom <- Dates_BT %>%
 #'    select(Year, sbloom) %>%
-#'    rename(Fday=sbloom)
+#'    rename(Fday=sbloom) %>%
+#'    filter(Year==2003)
 #' # Obtain estimated hourly RH from the example dataset Tudela_DW
-#' RH_h <- hourly_RH(Tudela_DW, 42.13132)
+#' Weather <- Tudela_DW %>%
+#'         filter (Tudela_DW$Year==2003)
+#' RH_h <- hourly_RH(Weather, 42.13132)
 #' # Estimate the number of russet-inducing days for a RH>55\% 
 #' # between 30 to 34 days after full bloom for each season
 #' Russet_Risk <-russet(RH_h,Bloom,55,30,34)
 #' 
 #' @export russet
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date year month day yday
 
 russet <- function(climdata, fendata, RH_crit, init_d, end_d)
 {

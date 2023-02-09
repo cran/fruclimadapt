@@ -23,12 +23,15 @@
 #' @examples
 #'
 #' # Generate hourly relative humidity
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
-#' Tudela_HRH <- hourly_RH(Tudela_DW, 42.13132)
+#' Weather <- Tudela_DW %>%
+#'    filter (Tudela_DW$Year==2003)
+#' Tudela_HRH <- hourly_RH(Weather, 42.13132)
 #' 
 #' @export hourly_RH
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date make_datetime date
 
 hourly_RH <- function(climdata,lat)

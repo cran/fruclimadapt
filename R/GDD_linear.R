@@ -26,7 +26,8 @@
 #'
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and no 
 #' # upper threshold.
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' GDD <- GDD_linear(Tudela_DW,4.5)
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and an 
 #' # upper threshold at 25ºC.
@@ -34,8 +35,8 @@
 #' 
 #'
 #' @export GDD_linear
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 GDD_linear <- function(Temp_Day,Tb,Tu=999)
 {

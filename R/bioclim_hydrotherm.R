@@ -60,7 +60,8 @@
 #' # Select the appropiate columns from a larger dataset with date information
 #' # in Year, Month, Day format, define the values for the parameters latitude 
 #' # and elevation and estimate the hydrotermal indices on each year in the series.
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' Weather <- Tudela_DW %>%
 #'    select(Year, Month, Day, Tmax, Tmin, Prec, RHmax, RHmin, Rad, u2med)
 #' elevation <- 314
@@ -68,9 +69,8 @@
 #' Tudela_BHI <- bioclim_hydrotherm(Weather, latitude, elevation)
 #'
 #' @export bioclim_hydrotherm
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
-#' 
 #' 
 bioclim_hydrotherm <- function(climdata, lat, elev)
 {

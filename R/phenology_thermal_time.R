@@ -30,7 +30,8 @@
 #' # Calculate GDD values from a climate dataset with daily temperature data,
 #' # using a base temperature of 0 C and format it to be compatible with 
 #' # phenology_thermal_time
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
 #' Tudela_GDD <- GDD_linear(Tudela_DW,0) %>% rename(GD=GDD)
 #' # Create a dataframe with start dates and forcing requirements for
@@ -44,7 +45,7 @@
 #' Phenology_Chardonnay <- phenology_thermal_time(Tudela_GDD,Chardonnay_reqs)
 #' 
 #' @export phenology_thermal_time
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
 
 phenology_thermal_time <- function(GD_day,Reqs){

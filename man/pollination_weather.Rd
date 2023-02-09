@@ -50,10 +50,15 @@ is favorable for pollination or not.
 
 # Estimate weather conditions during blooming season using the example
 # datasets included in the package
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
-Bloom_BT <- Dates_BT \%>\% select(Year, sbloom, ebloom)
-Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
+Bloom_BT <- Dates_BT \%>\% 
+   select(Year, sbloom, ebloom) \%>\% 
+   filter(Dates_BT$Year<=2002)
+Weather <- Tudela_DW \%>\%
+   filter (Tudela_DW$Year<=2002)
+Pol_weather_BT <- pollination_weather(Weather,Bloom_BT,42.13132)
 
 }
 \references{

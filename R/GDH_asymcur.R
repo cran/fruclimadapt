@@ -36,9 +36,12 @@
 #' @examples
 #'
 #' # Generate hourly temperatures for the example dataset
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
-#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#' Weather <- Tudela_DW %>%
+#'    filter (Tudela_DW$Year==2003)
+#' Tudela_HT <- hourly_temps(Weather,42.13132)
 #' # Calculate GDH using default threshold temperatures
 #' GDH_default <- GDH_asymcur(Tudela_HT)
 #' # Calculate GDH using as custom set temperature thresholds
@@ -47,8 +50,8 @@
 #' 
 #'
 #' @export GDH_asymcur
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday year month day
 
 GDH_asymcur <- function(Hourdata,Tb = 4 ,Topt = 25 ,Tcrit = 36)
   {
